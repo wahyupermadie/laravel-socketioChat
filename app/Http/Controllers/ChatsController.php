@@ -120,4 +120,16 @@ class ChatsController extends Controller
 				
 		}
 	}
+	public function endchat(Request $request){
+
+		$user_1= Auth::user()->id;
+		$inbox= DB::table('inbox')
+				->where('id_chatroom',$request->chatid)
+				->where('receiver', $user_1)
+				->delete();
+		$outbox= DB::table('outbox')
+				->where('id_chatroom',$request->chatid)
+				->where('sender', $user_1)
+				->delete();
+	}
 }
