@@ -14,11 +14,6 @@ io.on('connection', (socket) => {
         console.log('Disconnected')
     });
 
-    socket.on('pingServer', (data) => {
-        socket.emit('pingServer', (data))
-        // console.log(data)
-    });
-
     socket.on('chatMessage', (msg) => {
         socket.broadcast.emit('chatMessage', msg)
     })
