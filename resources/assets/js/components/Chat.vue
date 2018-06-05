@@ -14,12 +14,18 @@
                             Send
                         </button>
                     </span>
+                    <span class="input-group-btn" style="padding-left:5px">
+                        <button class="btn btn-primary btn-sm" id="btn-chat" @click="clearMessage">
+                            Delete
+                        </button>
+                    </span>
                 </div>
         </div>
   </div>
 </template>
 <script>
     import ChatMessages from './ChatMessages.vue'
+    import router from '../router'
     export default {
         components:{
             'chat-messages':ChatMessages
@@ -42,6 +48,7 @@
                 console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
             }
         },
+
         created() {
             this.fetchMessages();
         },
@@ -72,6 +79,16 @@
                     this.newMessage = ''
                 });
                 this.messages.push(message);
+            },
+
+            clearMessage(){
+                let chat_id={
+                    chatid :this.$route.params.id
+                };
+                axios.post('/api/endchat', chat_id).then(response => {
+                    console.log(response)
+                    router.push('/')
+                })
             }
         }
     }

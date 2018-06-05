@@ -32,4 +32,5 @@ Route::prefix('api')->group(function () {
     Route::post('createChat', 'ChatsController@createChat');
     Route::post('getMessages', 'ChatsController@fetchMessages');
     Route::post('messages', 'ChatsController@sendMessage');
+    Route::post('endchat', 'ChatsController@endchat');
 });
